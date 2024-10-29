@@ -20,6 +20,9 @@
     <ComponentSheetButton></ComponentSheetButton>
 
   </div>
+  <div h-9>
+    <iframe :key="url.key" :src="url.src" width="600" height="500"></iframe>
+  </div>
 </template>
 
 <script setup>
@@ -28,6 +31,8 @@ import '~/assets/css/tailwind.css';
 import '~/assets/css/transition.css';
 import ComponentSheetButton from '~/components/Sheet/FullWidthButton.vue';
 
+
+import { reactive } from 'vue'; const url = reactive({ key: 1, src: 'https://opennccu.com/u/lulu', });
 </script>
 
 <style>
