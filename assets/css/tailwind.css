@@ -1,0 +1,190 @@
+@tailwind base;
+
+@layer base {
+  :root {
+    @apply bg-base text-base-content;
+    --doc-height: 100%;
+  }
+
+  body,
+  html,
+  #__nuxt {
+    height: var(--doc-height);
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .h-real {
+    height: var(--doc-height);
+  }
+
+  input,
+  textarea,
+  button,
+  select,
+  a {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+}
+
+@tailwind components;
+
+@tailwind utilities;
+
+@font-face {
+  font-family: "Outfit";
+  src: url("~/assets/fonts/Outfit/Outfit-Thin.ttf");
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: "Outfit";
+  src: url("~/assets/fonts/Outfit/Outfit-ExtraLight.ttf");
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: "Outfit";
+  src: url("~/assets/fonts/Outfit/Outfit-Light.ttf");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Outfit";
+  src: url("~/assets/fonts/Outfit/Outfit-Regular.ttf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Outfit";
+  src: url("~/assets/fonts/Outfit/Outfit-Medium.ttf");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Outfit";
+  src: url("~/assets/fonts/Outfit/Outfit-SemiBold.ttf");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Outfit";
+  src: url("~/assets/fonts/Outfit/Outfit-Bold.ttf");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Outfit";
+  src: url("~/assets/fonts/Outfit/Outfit-ExtraBold.ttf");
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: "Outfit";
+  src: url("~/assets/fonts/Outfit/Outfit-Black.ttf");
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: "Noto Sans TC";
+  src: url("~/assets/fonts/NotoSansTC/NotoSansTC-Thin.otf");
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: "Noto Sans TC";
+  src: url("~/assets/fonts/NotoSansTC/NotoSansTC-ExtraLight.ttf");
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: "Noto Sans TC";
+  src: url("~/assets/fonts/NotoSansTC/NotoSansTC-Light.otf");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Noto Sans TC";
+  src: url("~/assets/fonts/NotoSansTC/NotoSansTC-Regular.otf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Noto Sans TC";
+  src: url("~/assets/fonts/NotoSansTC/NotoSansTC-Medium.otf");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Noto Sans TC";
+  src: url("~/assets/fonts/NotoSansTC/NotoSansTC-SemiBold.ttf");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Noto Sans TC";
+  src: url("~/assets/fonts/NotoSansTC/NotoSansTC-Bold.otf");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Noto Sans TC";
+  src: url("~/assets/fonts/NotoSansTC/NotoSansTC-ExtraBold.ttf");
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: "Noto Sans TC";
+  src: url("~/assets/fonts/NotoSansTC/NotoSansTC-Black.otf");
+  font-weight: 900;
+}
+
+/* Scroll bar stylings */
+
+::-webkit-scrollbar {
+  @apply h-3.5 w-3.5;
+}
+
+::-webkit-scrollbar-track {
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 0%,
+    #f0f0f0 91.74%,
+    #ffffff 95.1%,
+    #f0f0f0 95.33%,
+    #d9d9d9 95.46%,
+    #f0f0f0 98.18%,
+    #ffffff 100%
+  );
+  box-shadow: 4px 4px 9px 0px rgba(0, 0, 0, 0.1) inset,
+    -3px -3px 4px 0px rgba(252, 252, 252, 0.7) inset;
+}
+
+::-webkit-scrollbar {
+  @apply rounded-full;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply rounded-full;
+  background: linear-gradient(
+    270deg,
+    #d0d0d0 10%,
+    #f0f0f0 14.15%,
+    #f0f0f0 53.64%,
+    #fff 100%
+  );
+  transition: background-color 0.2s ease-in-out;
+  border: 2px solid;
+  border-image-slice: 0px 2px 0px 2px fill;
+  border-image-source: linear-gradient(
+    90deg,
+    #d9d9d9 0%,
+    #f0f0f0 10.15%,
+    #f0f0f0 53.64%,
+    #fff 100%
+  );
+  border-image-repeat: repeat;
+  border-image-width: 0px 2px 0px 2px;
+  background-clip: content-box;
+}

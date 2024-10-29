@@ -1,0 +1,32 @@
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.2s;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+}
+
+.flip-enter-active,
+.flip-leave-active {
+  transition: transform 0.2s;
+}
+.flip-enter-from,
+.flip-leave-to {
+  transform: scaleX(0);
+}
+
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: all 0.25s ease-out;
+}
+
+.slide-up-enter-from {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.slide-up-leave-to {
+  opacity: 0;
+  transform: translateY(-30px);
+}
