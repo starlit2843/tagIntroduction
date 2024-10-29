@@ -1,3 +1,11 @@
 <template>
-  <h1>ll</h1>
+  <div>
+    <ComponentSheetButton></ComponentSheetButton>
+
+  </div>
 </template>
+
+<script setup>
+import ComponentSheetButton from '~/components/Sheet/FullWidthButton.vue';
+
+</script>
