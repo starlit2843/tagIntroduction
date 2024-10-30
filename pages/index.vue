@@ -14,6 +14,13 @@
   </button>
 </div>
 
+<!--自調的-->
+<div>
+  <button class="bg-base-100 shadow-special-cta-02 place-self-center rounded-10 px-6 py-3">
+    <span class="text-[2vw] text-white min-[300px]:text-xl">趕緊取 ID 吧！</span>
+  </button>
+</div>
+
 <!--之前的-->
 <form class="shadow-input daisy-input flex flex-grow px-0 m-2 focus-within:outline-0 focus:outline-0 focus-within:shadow-input relative w-full items-center rounded-full">
   <input type="text" placeholder="貼上批量選課代碼" class="min-w-0 grow bg-transparent px-4 h-full w-full !focus:outline-none focus:border-none transition-[padding] duration-300 ease-in-out rounded-full font-medium px-4" value="">
@@ -25,7 +32,7 @@
 <!--自調的-->
 <form class="flex flex-grow px-0 m-2 relative w-full items-center rounded-full">
   <div class="relative max-w-lg m-2 flex h-12 cursor-default rounded-full text-center shadow-numo-light-inset">
-    <input v-model="message" placeholder="像哀居一樣取一個ID吧！" class="min-w-0 grow bg-transparent px-4 h-full w-full outline-none border-none transition-[padding] duration-300 ease-in-out rounded-full font-medium">
+    <input v-model="message" placeholder="像哀居一樣取一個 ID 吧！" class="min-w-0 grow bg-transparent px-4 h-full w-full outline-none border-none transition-[padding] duration-300 ease-in-out rounded-full font-medium">
   </div>
 </form>
 

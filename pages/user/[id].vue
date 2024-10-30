@@ -14,13 +14,6 @@
       <img src="~/assets/images/tutorial_1.png" width="500" alt="進度條圖示"/>
     </div>
   </div>
-<<<<<<< HEAD
-=======
-  <div>
-    <iframe src="https://www.nccu.edu.tw" width="500" scrolling="yes" align="center">
-    </iframe>
-  </div>
->>>>>>> a254450dba0f94cb969c0b3a350cfe6fdeaf5e4a
 </template>
 
 <script setup>
