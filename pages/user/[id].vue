@@ -7,8 +7,6 @@
     <iframe src="https://www.nccu.edu.tw" width="500" scrolling="yes" align="center">
     </iframe>
   </div>
-
-  <iframe :key="url.key" :src="url.src"></iframe>
 </template>
   
   
