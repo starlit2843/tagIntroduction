@@ -14,15 +14,7 @@
   </button>
 </div>
 
-<!--自調的新東西-->
-<div class="flex justify-center items-center">
-  <div class="flex gap-5">
-    <div class="specialcta-btn shadow-special-cta-02 rounded-30 w-24 py-1"></div>
-    <div class="relative w-24 py-1 flex cursor-default rounded-full shadow-numo-light-inset"></div>
-    <div class="relative w-24 py-1 flex cursor-default rounded-full shadow-numo-light-inset"></div>
-    <div class="relative w-24 py-1 flex cursor-default rounded-full shadow-numo-light-inset"></div>
-  </div>
-</div>
+
 
 
 <!--自調的-->
