@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenNCCU OAuth 指南</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+            margin: 0px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #7ce0b2;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 16px;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 10px;
+            background-color: #7ce0b2;
+            color: white;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            background-color: #f1f1f1;
+            padding: 16px;
+            border-radius: 4px;
+            border: 1px solid #d9d9d9;
+            overflow-x: auto;
+        }
+
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+        }
+
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        .tab button.active {
+            background-color: #7ce0b2;
+            color: white;
+        }
+
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #7ce0b2;
+            color: white;
+            text-align: center;
+        }
+    </style>
+    <script>
+        function openTab(evt, tabName, idx) {
+            console.log(evt, tabName, idx)
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = parseInt(idx / 3) * 3; i < parseInt(idx / 3) * 3 + 3; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = parseInt(idx / 3) * 3; i < parseInt(idx / 3) * 3 + 3; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementsByClassName("tabcontent")[idx].style.display = "block";
+            evt.currentTarget.className = "tablinks active";
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("NodeJS1").style.display = "block";
+            document.getElementById("NodeJS2").style.display = "block";
+            document.getElementById("NodeJS3").style.display = "block";
+            document.getElementById("NodeJS4").style.display = "block";
+            document.getElementById("defaultOpen1").className = "tablinks active";
+            document.getElementById("defaultOpen2").className = "tablinks active";
+            document.getElementById("defaultOpen3").className = "tablinks active";
+            document.getElementById("defaultOpen4").className = "tablinks active";
+        });
+    </script>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>OpenNCCU OAuth 指南</h1>
+
+        <div class="card">
+            <h2>簡介</h2>
+            <p>OpenNCCU OAuth 是政大校內統一身分驗證的解決方案。本指南將幫助您了解如何使用 OpenNCCU OAuth 進行身分驗證。</p>
+        </div>
+
+        <div class="card">
+            <h2>授權流程</h2>
+            <h3>步驟 1：設定參數</h3>
+
+            <p>必要的查詢參數：</p>
+            <table>
+                <tr>
+                    <th>KEY</th>
+                    <th>DESCRIPTION</th>
+                </tr>
+                <tr>
+                    <td>client_id</td>
+                    <td>應用程式的用戶端 ID</td>
+                </tr>
+                <tr>
+                    <td>redirect_uri</td>
+                    <td>決定 API 伺服器在使用者完成授權流程後將使用者重新導向的位置。</td>
+                </tr>
+                <tr>
+                    <td>response_type</td>
+                    <td>固定為 <code>code</code></td>
+                </tr>
+                <tr>
+                    <td>scope</td>
+                    <td>多個 scope 用<code>,</code>分隔</td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <th colspan="2" style="background-color: #aaa;">scope</th>
+                </tr>
+                <tr>
+                    <th>KEY</th>
+                    <th>DESCRIPTION</th>
+                </tr>
+                <tr>
+                    <td>profile</td>
+                    <td>個人資料</td>
+                </tr>
+                <tr>
+                    <td>dept</td>
+                    <td>系所、入學年</td>
+                </tr>
+                <tr>
+                    <td>email</td>
+                    <td>電子郵件</td>
+                </tr>
+                <tr>
+                    <td>inccu</td>
+                    <td>iNCCU 全人資訊</td>
+                </tr>
+            </table>
+            <p>建議使用</p>
+            <table>
+                <tr>
+                    <th>參數</th>
+                    <th>說明</th>
+                </tr>
+                <tr>
+                    <td>state</td>
+                    <td>指定應用程式用來維持授權要求和授權伺服器回應狀態的任何字串值</td>
+                </tr>
+            </table>
+            <h3>Request Sample</h3>
+            <div class="tab">
+                <button class="tablinks" onclick="openTab(event, 'NodeJS1', 0)" id="defaultOpen1">Node.js</button>
+                <button class="tablinks" onclick="openTab(event, 'Python1', 1)">Python</button>
+                <button class="tablinks" onclick="openTab(event, 'cURL1', 2)">cURL</button>
+            </div>
+
+            <div id="NodeJS1" class="tabcontent">
+                <pre><code>const querystring = require('querystring');
+
+const params = querystring.stringify({
+    client_id: 'YOUR_CLIENT_ID',
+    redirect_uri: 'YOUR_REDIRECT_URI',
+    response_type: 'code',
+    scope: 'openid profile email',
+    state: 'RANDOM_STATE_STRING'
+});
+
+const authUrl = `https://oauth.opennccu.com/auth?${params}`;
+console.log('Redirect the user to:', authUrl);</code></pre>
+            </div>
+
+            <div id="Python1" class="tabcontent">
+                <pre><code>from urllib.parse import urlencode
+
+params = urlencode({
+    'client_id': 'YOUR_CLIENT_ID',
+    'redirect_uri': 'YOUR_REDIRECT_URI',
+    'response_type': 'code',
+    'scope': 'openid profile email',
+    'state': 'RANDOM_STATE_STRING'
+})
+
+auth_url = f'https://oauth.opennccu.com/auth?{params}'
+print('Redirect the user to:', auth_url)</code></pre>
+            </div>
+
+            <div id="cURL1" class="tabcontent">
+                <pre><code>curl -X GET 'https://oauth.opennccu.com/auth?client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&response_type=code&scope=openid%20profile%20email&state=RANDOM_STATE_STRING'</code></pre>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>步驟 2：重新導向至 OpenNCCU 的 OAuth 2.0 伺服器</h3>
+            <pre>[xxx]表示這是一個變數，需要自行填入
+https://oauth.opennccu.com/authorize?scope=email,profile,dept&response_type=code&state=[state_parameter_passthrough_value]&redirect_uri=[https%3A//oauth2.example.com/code]&client_id=[client_id]</pre>
+        </div>
+        <div class="card">
+            <h3>步驟 3：OpenNCCU 提示使用者提供同意聲明</h3>
+            <p>在這個步驟中，使用者可以決定是否要授予應用程式要求的存取權。</p>
+
+        </div>
+
+        <div class="card">
+            <h3>步驟 4：處理 OAuth 伺服器回應</h3>
+            <p>OAuth 伺服器會使用要求中指定的網址，回應應用程式的存取要求。</p>
+            <p>如果使用者核准存取要求，回應就會包含授權碼。如果使用者未核准要求，回應會包含錯誤訊息。傳回到網路伺服器的授權碼或錯誤訊息會顯示在查詢字串中，如下所示：</p>
+            <p>錯誤回應：</p>
+            <pre>https://oauth2.example.com/code?error=access_denied&</pre>
+            <p>授權碼回應</p>
+            <pre>https://oauth2.example.com/auth?code=869e308c64a03f3e0e2d81db510f893c6ad3d063c8e90dafef7742ae30e87b27</pre>
+            <p>完成 OAuth 流程後，系統應會將您重新導向至 <a
+                    href="http://localhost/oauth2callback"><code>http://localhost/oauth2callback</code></a></p>
+            <p>下一步是在重新導向至應用程式時，傳回 URI 中傳回的資訊。</p>
+            <h3>Request Sample</h3>
+        </div>
+
+        <div class="card">
+            <h3>步驟 5：交換 refresh_token 和 access_token</h3>
+            <p>請呼叫 <a href="https://oauth.opennccu.com/token"><code>https://oauth.opennccu.com/token</code></a> 並帶上以下
+            </p>
+            <p><code>POST Headers</code></p>
+            <table>
+                <tr>
+                    <th>KEY</th>
+                    <th>VALUE</th>
+                </tr>
+                <tr>
+                    <td><code>Content-Type</code></td>
+                    <td><code>application/x-www-form-urlencoded</code></td>
+                </tr>
+            </table>
+            <p><code>POST Body</code></p>
+            <table>
+                <tr>
+                    <th>KEY</th>
+                    <th>DESCRIPTION</th>
+                </tr>
+                <tr>
+                    <td>client_id</td>
+                    <td>應用程式的用戶端 ID</td>
+                </tr>
+                <tr>
+                    <td>client_secret</td>
+                    <td>應用程式的用戶端密碼</td>
+                </tr>
+                <tr>
+                    <td>code</td>
+                    <td>步驟 4 中取得的授權碼</td>
+                </tr>
+                <tr>
+                    <td>grant_type</td>
+                    <td>authorization_code</td>
+                </tr>
+                <tr>
+                    <td>redirect_uri</td>
+                    <td>先前步驟中使用的網址。</td>
+                </tr>
+            </table>
+            <p>範例</p>
+            <pre>[xxx]表示這是一個變數，需要自行填入
+POST /token HTTP/1.1
+Host: oauth.opennccu.com
+Content-Type: application/x-www-form-urlencoded
+
+code=[先前回傳的code]&
+client_id=[your_client_id]&
+client_secret=[your_client_secret]&
+redirect_uri=[https%3A//oauth2.example.com/code]&
+grant_type=authorization_code</pre>
+            <p>回傳的 JSON 會包含下列資訊：</p>
+            <table>
+                <tr>
+                    <th>KEY</th>
+                    <th>DESCRIPTION</th>
+                </tr>
+                <tr>
+                    <td>access_token</td>
+                    <td>用來取得資料的 token，有效期限 1 小時</td>
+                </tr>
+                <tr>
+                    <td>expires_in</td>
+                    <td>有效期限，單位為秒</td>
+                </tr>
+                <tr>
+                    <td>refresh_token</td>
+                    <td>用來更新 <code>access_token</code> 的 token，有效期限 30 天</td>
+                </tr>
+                <tr>
+                    <td>scope</td>
+                    <td>權限，以空白分隔</td>
+                </tr>
+                <tr>
+                    <td>token_type</td>
+                    <td><code>Bearer</code></td>
+                </tr>
+            </table>
+            <p>範例：</p>
+            <pre>
+{
+    "access_token": "54f91e3551c7c88fc1c9461ecd27267686ad9e19a7d52a784d51d41f2cc143b9",
+    "expires_in": 3600,
+    "token_type": "Bearer",
+    "scope": "profile dept",
+    "refresh_token": "be0545b14ede593cfe30ea4a827cd53a9774bff620f8aed580eec30a48c9703b"
+}</pre>
+            <div class="tab">
+                <button class="tablinks" onclick="openTab(event, 'NodeJS2', 3)" id="defaultOpen2">Node.js</button>
+                <button class="tablinks" onclick="openTab(event, 'Python2', 4)">Python</button>
+                <button class="tablinks" onclick="openTab(event, 'cURL2', 5)">cURL</button>
+            </div>
+
+            <div id="NodeJS2" class="tabcontent">
+                <pre><code>fetch("https://oauth.opennccu.com/token", {
+method: "POST",
+headers: {
+    "Content-Type": "application/x-www-form-urlencoded",
+},
+body: `grant_type=authorization_code&code=${query.code}&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&redirect_uri=${REDIRECT_URL}`,
+});</code></pre>
+            </div>
+
+            <div id="Python2" class="tabcontent">
+                <pre><code>import requests
+
+access_token = 'YOUR_ACCESS_TOKEN'
+headers = {
+    'Authorization': f'Bearer {access_token}'
+}
+
+response = requests.get('https://oauth.opennccu.com/userinfo', headers=headers)
+print('User Info:', response.json())</code></pre>
+            </div>
+
+            <div id="cURL2" class="tabcontent">
+                <pre><code>curl -X GET 'https://oauth.opennccu.com/userinfo' \
+    -H 'Authorization: Bearer YOUR_ACCESS_TOKEN'</code></pre>
+            </div>
+        </div>
+        <div class="card">
+            <h3>使用 access_token 取得資料</h3>
+            <p>請呼叫 <a href="https://oauth.opennccu.com/data"><code>https://oauth.opennccu.com/data</code></a> 並帶上以下</p>
+            <p>範例：</p>
+            <pre>
+[xxx]表示這是一個變數，需要自行填入
+GET /data/ HTTP/1.1
+Host: oauth.opennccu.com
+Authorization: Bearer [您的 access_token]</pre>
+            <p>如果授權被使用者在 Open NCCU 取消，該個 key 會寫"unauthorized"</p>
+            <p>例如</p>
+            <pre>
+{
+    "email": "xxxxx@gmail.com",
+    "inccu": "unauthorized"
+}</pre>
+            <p>Sample Code</p>
+            <div class="tab">
+                <button class="tablinks" onclick="openTab(event, 'NodeJS3', 6)" id="defaultOpen3">Node.js</button>
+                <button class="tablinks" onclick="openTab(event, 'Python3', 7)">Python</button>
+                <button class="tablinks" onclick="openTab(event, 'cURL3', 8)">cURL</button>
+            </div>
+
+            <div id="NodeJS3" class="tabcontent">
+                <pre><code>fetch("https://oauth.opennccu.com/data", {
+    method: "GET",
+    headers: {
+        authorization: `Bearer ${accessToken}`,
+    },
+});</code></pre>
+            </div>
+
+            <div id="Python3" class="tabcontent">
+                <pre><code>import requests
+
+url = "https://oauth.opennccu.com/data"
+headers = {
+    "Authorization": f"Bearer {accessToken}"
+}
+
+response = requests.get(url, headers=headers)
+
+# If you want to print the response:
+print(response.status_code)
+print(response.json())  # Assuming the response is in JSON format</code></pre>
+            </div>
+
+            <div id="cURL3" class="tabcontent">
+                <pre><code>curl -X GET "https://oauth.opennccu.com/data" \
+-H "Authorization: Bearer $accessToken"</code></pre>
+            </div>
+        </div>
+        <div class="card">
+            <h3>使用 refresh_token 更新 access_token</h3>
+            <p>請呼叫 <a href="https://oauth.opennccu.com/token"><code>https://oauth.opennccu.com/token</code></a> 並帶上以下
+            </p>
+            <p><code>POST Headers</code></p>
+            <table>
+                <tr>
+                    <th>KEY</th>
+                    <th>VALUE</th>
+                </tr>
+                <tr>
+                    <td><code>Content-Type</code></td>
+                    <td><code>application/x-www-form-urlencoded</code></td>
+                </tr>
+            </table>
+            <p><code>POST Body</code></p>
+            <table>
+                <tr>
+                    <th>KEY</th>
+                    <th>DESCRIPTION</th>
+                </tr>
+                <tr>
+                    <td>client_id</td>
+                    <td>應用程式的用戶端 ID</td>
+                </tr>
+                <tr>
+                    <td>client_secret</td>
+                    <td>應用程式的用戶端密碼</td>
+                </tr>
+                <tr>
+                    <td>code</td>
+                    <td>步驟 4 中取得的授權碼</td>
+                </tr>
+                <tr>
+                    <td>grant_type</td>
+                    <td><code>authorization_code</code></td>
+                </tr>
+                <tr>
+                    <td>redirect_uri</td>
+                    <td>先前步驟中使用的網址</td>
+                </tr>
+            </table>
+            <p>範例：</p>
+            <pre>
+[xxx]表示這是一個變數，需要自行填入
+POST /token HTTP/1.1
+Host: oauth.opennccu.com
+Content-Type: application/x-www-form-urlencoded
+
+client_id=[your_client_id]&
+client_secret=[your_client_secret]&
+refresh_token=[refresh_token]&
+grant_type=refresh_token</pre>
+            <p>回傳的 JSON 會包含下列資訊：</p>
+            <table>
+                <tr>
+                    <th>KEY</th>
+                    <th>DESCRIPTION</th>
+                </tr>
+                <tr>
+                    <td>access_token</td>
+                    <td>用來取得資料的 token，有效期限 1 小時</td>
+                </tr>
+                <tr>
+                    <td>expires_in</td>
+                    <td>有效期限，單位秒</td>
+                </tr>
+                <tr>
+                    <td>scope</td>
+                    <td>權限，以空白分隔</td>
+                </tr>
+                <tr>
+                    <td>token_type</td>
+                    <td><code>Bearer</code></td>
+                </tr>
+            </table>
+            <p>範例：</p>
+            <pre>
+{
+    "access_token": "54f91e3551c7c88fc1c9461ecd27267686ad9e19a7d52a784d51d41f2cc143b9",
+    "expires_in": 3600,
+    "token_type": "Bearer",
+    "scope": "profile dept"
+}</pre>
+            <p>Sample Code</p>
+            <div class="tab">
+                <button class="tablinks" onclick="openTab(event, 'NodeJS4', 9)" id="defaultOpen4">Node.js</button>
+                <button class="tablinks" onclick="openTab(event, 'Python4', 10)">Python</button>
+                <button class="tablinks" onclick="openTab(event, 'cURL4', 11)">cURL</button>
+            </div>
+
+            <div id="NodeJS4" class="tabcontent">
+                <pre><code>fetch("https://oauth.opennccu.com/api/token", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: `grant_type=refresh_token&refresh_token=${refreshToken}&client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}`,
+});</code></pre>
+            </div>
+
+            <div id="Python4" class="tabcontent">
+                <pre><code>import requests
+
+url = "https://oauth.opennccu.com/api/token"
+headers = {
+    "Content-Type": "application/x-www-form-urlencoded"
+}
+
+data = {
+    "grant_type": "refresh_token",
+    "refresh_token": refreshToken,  # Replace with your actual refresh token
+    "client_id": "your_client_id",  # Replace with your actual client ID
+    "client_secret": "your_client_secret"  # Replace with your actual client secret
+}
+
+response = requests.post(url, headers=headers, data=data)
+
+# If you want to print the response:
+print(response.status_code)
+print(response.json())  # Assuming the response is in JSON format</code></pre>
+            </div>
+
+            <div id="cURL4" class="tabcontent">
+                <pre><code>curl -X POST "https://oauth.opennccu.com/api/token" \
+-H "Content-Type: application/x-www-form-urlencoded" \
+-d "grant_type=refresh_token&refresh_token=$refreshToken&client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET"</code></pre>
+            </div>
+        </div>
+        <div class="card">
+            <h3>其他附註</h3>
+            <table>
+                <tr>
+                    <th>KEY</th>
+                    <th>DESCRIPTION</th>
+                </tr>
+                <tr>
+                    <td>auth_code</td>
+                    <td>只能使用一次，使用後會失效</td>
+                </tr>
+                <tr>
+                    <td>refresh_token</td>
+                    <td>只能使用一次，使用後會失效</td>
+                </tr>
+                <tr>
+                    <td>access_token</td>
+                    <td>有效期限為 1 小時，過期後請使用 refresh_token 更新</td>
+                </tr>
+                <tr>
+                    <td>refresh_token</td>
+                    <td>有效期限為 30 天，每次更新 access_token 都會更新 refresh_token 的有效期限</td>
+                </tr>
+            </table>
+        </div>
+        <div class="card">
+            Authored by <a href="https://github.com/CTHua">CTHua</a>
+        </div>
+    </div>
+    <footer>
+        <p>© 2024 OpenNCCU</p>
+    </footer>
+</body>
+
+</html>
