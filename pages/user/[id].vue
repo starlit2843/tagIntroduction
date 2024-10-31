@@ -15,8 +15,9 @@
           跳過教學
         </span>
       </div>
-      <iframe src="https://opennccu.com/u/Naijia" width="500" height="500" scrolling="yes" align="center"></iframe>
+      <iframe src="https://opennccu.com/u/Naijia" width="400" height="400" scrolling="yes" align="center"></iframe>
       <BottomBar :activeIndex="currentStep" />
+      <TextField :activeIndex="currentStep" />
       <div class="flex justify-center" v-if="currentStep<4">
         <button class="specialcta-btn shadow-special-cta-02 place-self-center rounded-10 px-6 py-3" @click="nextStep">
           <span class="text-[2vw] text-white min-[300px]:text-xl">下一步</span>
@@ -26,6 +27,7 @@
           <span class="text-[2vw] text-white min-[300px]:text-xl">馬上去設置</span>
         </button>
       </div>
+      <div></div>
     </div>
   </div>
 </template>
@@ -35,6 +37,7 @@
   import { ref } from 'vue';
   import { useRoute } from 'vue-router';
   import BottomBar from '~/components/tag_introduction/bottom_bar.vue';
+  import TextField from '~/components/tag_introduction/text_field.vue';
 
   const route = useRoute();
   const { id } = route.params;

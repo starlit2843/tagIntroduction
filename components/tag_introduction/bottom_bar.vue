@@ -47,7 +47,6 @@
   <script setup>
   import { defineProps } from 'vue';
   
-  // 接收 activeIndex 作為 prop 來控制按鈕位置
   const props = defineProps({
     activeIndex: {
       type: Number,
@@ -56,8 +55,4 @@
     }
   });
   </script>
-  
-  <style scoped>
-  /* 如有需要可以在這裡加上樣式 */
-  </style>
   
