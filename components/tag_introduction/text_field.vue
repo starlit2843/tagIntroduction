@@ -1,7 +1,7 @@
 <template>
     <div class="flex justify-center items-center">
       <div class="flex gap-5">
-        <!-- 第一頁 -->
+        <!-- 第一頁  -->
         <div
           v-if="activeIndex == 1"
         >
