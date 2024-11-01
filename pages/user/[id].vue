@@ -15,8 +15,6 @@
           跳過教學
         </span>
       </div>
-      <iframe src="https://opennccu.com/u/Naijia" width="500" height="500" scrolling="yes" align="center"></iframe>
-      <img src="~/assets/images/tutorial_1.png" width="500" alt="進度條圖示"/>
       <iframe src="https://opennccu.com/u/Naijia" width="400" height="400" scrolling="yes" align="center"></iframe>
       <BottomBar :activeIndex="currentStep" />
       <TextField :activeIndex="currentStep" />
@@ -35,7 +33,6 @@
 </template>
 
 <script setup>
-import { useRoute } from 'vue-router';
   import '~/assets/css/tailwind base.css';
   import { ref } from 'vue';
   import { useRoute } from 'vue-router';
