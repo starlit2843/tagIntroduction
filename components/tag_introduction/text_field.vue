@@ -30,12 +30,12 @@
               </div>
               
             </div>
-            <!--
+            
             <div class="flex justify-center items-center">
               <form class="flex flex-grow px-0 m-2 relative w-[350px] items-center rounded-full ">
                   <div class="relative max-w-lg m-2 flex h-12 w-[350px] cursor-default rounded-full text-center shadow-numo-light-inset">
                       <input v-model="message" placeholder="馬上新增限時連結#1" class="min-w-0 grow bg-transparent px-4 h-full w-full outline-none border-none transition-[padding] duration-300 ease-in-out rounded-full font-medium">
-                      <img src="~/assets/images/addLinkIcon.png" class="absolute right-[5%] top-1/2 transform -translate-y-1/2 w-5 h-5" alt="add link pic">
+                      <img src="~/assets/images/addLinkIcon.png" class="absolute right-[6%] top-1/2 transform -translate-y-1/2 w-6 h-6" alt="add link pic">
                   </div>
               </form>
             </div>
@@ -53,7 +53,7 @@
                 </button>
               </div>
             </div>
-            -->
+            
         </div>
   
         <!-- 第三頁 -->
@@ -70,13 +70,13 @@
                 <img src="~/assets/images/openLinkIcon.png" class="top-1/2 mr-5 w-5 h-5" alt="open link pic">
               </button>
             </div>
-            <!--
+            
             <div class="flex justify-center items-center">
               <button class="bg-base-100 shadow-numo-modal place-self-center rounded-10 px-5 py-2.5">
                 <span class=" text-white text-sm">趕緊查看吧！</span>
               </button>
             </div>
-            -->
+            
         </div>
   
         <!-- 第四頁 -->
