@@ -8,6 +8,13 @@
 </div>
 
 <!--自調的-->
+<div class="flex justify-center items-center m-2" @click="nextStep">
+  <button class="flex flex-row relative items-center w-[350px] justify-start gap-1 rounded-full font-sans font-bold text-base-content shadow-numo-icon">
+    <p class="flex h-12 grow items-center text-info ml-5">https://opennccu.com/u/Naijia</p>
+    <img src="~/assets/images/openLinkIcon.png" class="top-1/2 mr-5 w-5 h-5" alt="open link pic">
+  </button>
+</div>
+
 <div>
   <button class="specialcta-btn  shadow-special-cta-02 place-self-center rounded-10 px-6 py-3">
     <span class="text-[2vw] text-white min-[300px]:text-xl">下一步</span>
@@ -27,8 +34,8 @@
 
 <!--自調的-->
 <div>
-  <button class="bg-base-100 shadow-special-cta-02 place-self-center rounded-10 px-6 py-3">
-    <span class="text-[2vw] text-white min-[300px]:text-xl">趕緊取 ID 吧！</span>
+  <button class="bg-base-100 shadow-numo-modal place-self-center rounded-10 px-4 py-2">
+    <span class=" text-white text-sm">趕緊查看吧！</span>
   </button>
 </div>
 
@@ -40,18 +47,46 @@
   </button>
 </form>
 
-<!--自調的-->
-<form class="flex flex-grow px-0 m-2 relative w-full items-center rounded-full">
-  <div class="relative max-w-lg m-2 flex h-12 cursor-default rounded-full text-center shadow-numo-light-inset">
-    <input v-model="message" placeholder="像哀居一樣取一個 ID 吧！" class="min-w-0 grow bg-transparent px-4 h-full w-full outline-none border-none transition-[padding] duration-300 ease-in-out rounded-full font-medium">
+<!--自調的，搭配下方前兩個 style scoped-->
+<div class="flex justify-center items-center">
+  <form class="flex flex-grow px-0 m-2 relative w-[350px] items-center rounded-full ">
+    <div class="relative max-w-lg m-2 flex h-12 w-[350px] cursor-default rounded-full text-center shadow-numo-light-inset">
+      <input v-model="message" placeholder="馬上新增限時連結#1" class="min-w-0 grow bg-transparent px-4 h-full w-full outline-none border-none transition-[padding] duration-300 ease-in-out rounded-full font-medium">
+      <img src="~/assets/images/addLinkIcon.png" class="absolute right-[5%] top-1/2 transform -translate-y-1/2 w-5 h-5" alt="add link pic">
+    </div>
+  </form>
+</div>
+<div class="flex justify-center items-center">
+  <div class="flex gap-x-5">
+    <button class="flex flex-row items-center justify-start gap-1 rounded-full span-2 px-6 py-4 font-sans font-bold text-base-content shadow-numo-card">
+        <p class="font-medium text-info text-center">
+                    英文家教講義
+                  </p>
+    </button>
+    <button class="flex flex-row items-center justify-start gap-1 rounded-full span-2 px-6 py-4 font-sans font-bold text-base-content shadow-numo-card">
+                  <p class="font-medium text-info text-center">
+                    英文家教講義
+        </p>
+    </button>
   </div>
-</form>
+</div>
 
-<!--之前的-->
+<!--之前的 But-->
+
   <div>
-    <ComponentSheetButton></ComponentSheetButton>
-
+    <button class="flex flex-row items-center justify-start gap-1 rounded-lg span-2 px-6 py-4 font-sans font-bold text-base-content shadow-numo-card">
+    </button>
   </div>
+
+<!--自調的 But-->
+
+<div>
+    <button class="flex flex-row items-center justify-start gap-1 rounded-full span-2 px-6 py-4 font-sans font-bold text-base-content shadow-numo-card">
+      <p class="text-xl text-info font-semibold text-center">
+        英文家教講義
+      </p>
+    </button>
+</div>
 
   <!--自調的-->
   <div h-9>
@@ -65,6 +100,7 @@ import '~/assets/css/tailwind base.css';
 import '~/assets/css/tailwind.css';
 import '~/assets/css/transition.css';
 
+/*之前的 But*/
 import ComponentSheetButton from '~/components/Sheet/FullWidthButton.vue';
 
 
@@ -85,4 +121,16 @@ const message = ref('');
 .rounded-10{border-radius:10px}
 .outline-none:focus { outline: none}
 .border-none:focus { border: none }
+</style>
+
+<style scoped>
+.w-\[350px\]{
+width: 350px;
+}
+
+.right-\[5\%\]{
+  right:5%
+}
+
+.ml-5{margin-left:1.25rem}
 </style>

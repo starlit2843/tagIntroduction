@@ -1,21 +1,25 @@
 <template>
   <div class="flex justify-around py-4 max-w-screen-lg mx-auto">
-    <div class="flex flex-col gap-8 bg-gray-100">
+    <div class="flex flex-col gap-6 bg-gray-100">
       <div class="flex justify-between items-center grid-cols-3">
-        <span class="last_step text-2xl font-semibold cursor-pointer" @click="lastStep" v-if="currentStep>1">
+        <span v-if="currentStep > 1" class="last_step text-xl font-semibold cursor-pointer" @click="lastStep">
           上一步
         </span>
-        <span class="last_step text-2xl font-semibold cursor-pointer" @click="lastStep" v-else>
-
+        <span v-else class="text-xl font-semibold opacity-0">
+          上一步
         </span>
-        <p class="text-2xl text-gray-300 font-semibold text-center">
+        <p class="text-xl text-gray-300 font-semibold text-center">
           限時連結功能指引
         </p>
-        <span class="skip_tutorial text-2xl font-semibold cursor-pointer" @click="skipTutorial">
+        <span class="skip_tutorial text-xl font-semibold cursor-pointer" @click="skipTutorial">
           跳過教學
         </span>
       </div>
-      <iframe src="https://opennccu.com/u/Naijia" width="400" height="400" scrolling="yes" align="center"></iframe>
+      <div class="flex justify-center items-center">
+        <div class="w-[400px] h-[410px] rounded-lg border border-gray-300 relative shadow-numo-light-inset">
+          <iframe src="https://opennccu.com/u/Naijia" scrolling="yes" class="h-full w-full rounded-lg border border-gray-300"></iframe>
+        </div>
+      </div>
       <BottomBar :activeIndex="currentStep" />
       <TextField :activeIndex="currentStep" />
       <div class="flex justify-center" v-if="currentStep<4">
@@ -66,4 +70,14 @@
   .skip_tutorial, .last_step{
     color:darkseagreen;
   }
+</style>
+
+<style scoped>
+.w-\[400px\]{
+  width: 400px;
+}
+.h-\[410px\]{
+  height: 410px;
+}
+
 </style>
