@@ -15,7 +15,22 @@
           跳過教學
         </span>
       </div>
-      <div class="flex justify-center items-center">
+      <div class="flex justify-center items-center" v-if="currentStep==1">
+        <div class="w-[400px] h-[410px] rounded-lg border border-gray-300 relative shadow-numo-light-inset">
+          <img :src="dogLoadGif" alt="dog loading pic" class="h-full w-full rounded-lg border border-gray-300"></img>
+        </div>
+      </div>
+      <div class="flex justify-center items-center" v-if="currentStep==2">
+        <div class="w-[400px] h-[410px] rounded-lg border border-gray-300 relative shadow-numo-light-inset">
+          <img :src="dogWorkGif" alt="dog working pic" class="h-full w-full rounded-lg border border-gray-300"></img>
+        </div>
+      </div>
+      <div class="flex justify-center items-center" v-if="currentStep==3">
+        <div class="w-[400px] h-[410px] rounded-lg border border-gray-300 relative shadow-numo-light-inset">
+          <img :src="deerWorkGif" alt="deer working pic" class="h-full w-full rounded-lg border border-gray-300"></img>
+        </div>
+      </div>
+      <div class="flex justify-center items-center" v-if="currentStep==4">
         <div class="w-[400px] h-[410px] rounded-lg border border-gray-300 relative shadow-numo-light-inset">
           <iframe src="https://opennccu.com/u/Naijia" scrolling="yes" class="h-full w-full rounded-lg border border-gray-300"></iframe>
         </div>
@@ -42,6 +57,14 @@
   import { useRoute } from 'vue-router';
   import BottomBar from '~/components/tag_introduction/bottom_bar.vue';
   import TextField from '~/components/tag_introduction/text_field.vue';
+
+  import dogLoadingGif from '@/assets/images/dogLoading.gif';
+  import dogWorkingGif from '@/assets/images/dogWorking.gif';
+  import deerWorkingGif from '@/assets/images/deerWorking.gif';
+  const dogLoadGif = ref(dogLoadingGif);
+  const dogWorkGif = ref(dogWorkingGif);
+  const deerWorkGif = ref(deerWorkingGif);
+  
 
   const route = useRoute();
   const { id } = route.params;
