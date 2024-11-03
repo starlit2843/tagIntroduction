@@ -117,7 +117,7 @@
   const route = useRoute();
   const id = route.params.id;
 
-  const currentStep = ref(4);
+  const currentStep = ref(1);
   const maxSteps = 4;
   const linkSelected = ref(false);
   const linkToProfileCheck = ref(false);
