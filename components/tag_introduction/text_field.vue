@@ -76,9 +76,7 @@
             </div>
             <div class="flex justify-center items-center p-5" @click="linkToProfile">
               <button class="flex flex-row relative items-center w-[350px] justify-start gap-1 rounded-full font-sans font-bold text-base-content shadow-numo-icon">
-                <a :href="`https://opennccu.com/u/${id}`">
-                  <p class="flex h-12 grow items-center text-info ml-5">{{ `https://opennccu.com/u/${id}` }}</p>
-                </a>
+                <span class="flex h-12 grow items-center text-info ml-5">{{ `https://opennccu.com/u/${id}` }}</span>
                 <img src="~/assets/images/openLinkIcon.png" class="top-1/2 mr-5 w-5 h-5" alt="open link pic">
               </button>
             </div>
@@ -110,11 +108,11 @@
   </template>
   
   <script setup>
-  import { defineProps, ref, emit } from 'vue';
+  import { defineProps, ref, defineEmits } from 'vue';
 
-  const showLinks = ref(false);
+  const emit = defineEmits(['updateLinkSelected', 'linkToProfile']);
   const inputPlaceholder = ref("馬上新增限時連結#1");
-  const linkToProfileCheck = ref(false);
+  const showLinks = ref(false);
   
   const props = defineProps({
     activeIndex: {
@@ -125,6 +123,10 @@
     id: {
       type: String,
       required: true
+    },
+    linkToProfileCheck: {
+      type: Boolean,
+      required: false
     }
   });
 
@@ -134,11 +136,10 @@
   }
 
   function linkToProfile(){
-    linkToProfileCheck.value = true;
+    const url = `https://opennccu.com/u/${props.id}`;
+    window.open(url, '_blank');
     emit("linkToProfile", true);
   }
-
-
 </script>
   
 <style scoped>
