@@ -25,7 +25,7 @@
             <div class="flex justify-center items-center m-2" @click="showLinks = true"> 
               <div class="relative max-w-lg m-2 flex h-12 w-[350px] items-center cursor-default rounded-full shadow-numo-light-inset">
                 <input v-model="message" :placeholder="inputPlaceholder" class="min-w-0 ml-2 grow bg-transparent px-4 h-full outline-none border-none transition-[padding] duration-300 ease-in-out rounded-full font-medium">
-                <img src="~/assets/images/addLinkIcon.png" class="absolute right-[6%] top-1/2 transform -translate-y-1/2 w-6 h-6" alt="add link pic">
+                <img :src="iconSwitch" class="absolute right-[6%] top-1/2 transform -translate-y-1/2 w-6 h-6" alt="link pic">
               </div>             
             </div>
             <!--
@@ -42,12 +42,12 @@
             <!--要再新增綠勾勾-->
             <div v-if="showLinks" class="flex justify-center items-center">
               <div class="flex gap-x-5">
-                <button class="flex flex-row items-center justify-start gap-1 rounded-full span-2 px-6 py-4 font-sans font-bold text-base-content shadow-numo-card" @click="selectLink('https://www.nccu.edu.tw/')">
+                <button class="flex flex-row items-center justify-start gap-1 rounded-full span-2 px-6 py-4 font-sans font-bold text-base-content shadow-numo-card" @click="selectLink('https://www.nccu.edu.tw/');toggleIcon()">
                   <p class="font-medium text-info text-center">
                     通識課期中報告
                   </p>
                 </button>
-                <button class="flex flex-row items-center justify-start gap-1 rounded-full span-2 px-6 py-4 font-sans font-bold text-base-content shadow-numo-card" @click="selectLink('英文家教講義')">
+                <button class="flex flex-row items-center justify-start gap-1 rounded-full span-2 px-6 py-4 font-sans font-bold text-base-content shadow-numo-card" @click="selectLink('英文家教講義');toggleIcon()">
                   <p class="font-medium text-info text-center">
                     英文家教講義
                   </p>
@@ -76,9 +76,7 @@
             </div>
             <div class="flex justify-center items-center p-5" @click="linkToProfile">
               <button class="flex flex-row relative items-center w-[350px] justify-start gap-1 rounded-full font-sans font-bold text-base-content shadow-numo-icon">
-                <a :href="`https://opennccu.com/u/${id}`">
-                  <p class="flex h-12 grow items-center text-info ml-5">{{ `https://opennccu.com/u/${id}` }}</p>
-                </a>
+                <span class="flex h-12 grow items-center text-info ml-5">{{ `https://opennccu.com/u/${id}` }}</span>
                 <img src="~/assets/images/openLinkIcon.png" class="top-1/2 mr-5 w-5 h-5" alt="open link pic">
               </button>
             </div>
@@ -110,12 +108,17 @@
   </template>
   
   <script setup>
-  import { defineProps, ref, emit } from 'vue';
+  import { defineProps, ref, defineEmits } from 'vue';
+  import icon1 from '~/assets/images/addLinkIcon.png';
+  import icon2 from '~/assets/images/linkCheck.png';
 
-  const showLinks = ref(false);
+  const emit = defineEmits(['updateLinkSelected', 'linkToProfile']);
   const inputPlaceholder = ref("馬上新增限時連結#1");
-  const linkToProfileCheck = ref(false);
-  
+  const showLinks = ref(false);
+  //const icon1 = '/assets/images/addLinkIcon.png'; 
+  //const icon2 = '/assets/images/linkCheck.png';    
+  const iconSwitch = ref(icon1);
+
   const props = defineProps({
     activeIndex: {
       type: Number,
@@ -125,6 +128,10 @@
     id: {
       type: String,
       required: true
+    },
+    linkToProfileCheck: {
+      type: Boolean,
+      required: false
     }
   });
 
@@ -134,11 +141,14 @@
   }
 
   function linkToProfile(){
-    linkToProfileCheck.value = true;
+    const url = `https://opennccu.com/u/${props.id}`;
+    window.open(url, '_blank');
     emit("linkToProfile", true);
   }
 
-
+  function toggleIcon() {
+    iconSwitch.value = icon2 ;
+  }
 </script>
   
 <style scoped>

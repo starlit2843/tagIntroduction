@@ -34,8 +34,20 @@
           </div>
         </div>
         <div class="flex justify-center items-center" v-if="currentStep==4">
+          
           <div class="w-[400px] h-[410px] rounded-lg border border-gray-300 relative shadow-numo-light-inset">
             <iframe src="https://opennccu.com/u/Naijia" scrolling="yes" class="h-full w-full rounded-lg border border-gray-300"></iframe>
+          
+
+          <!-- 陰影測試 
+          <div class="relative w-[400px] h-[410px]">
+           
+            <div class="pointer-events-none absolute inset-0 rounded-lg border border-gray-300 shadow-numo-light-inset" style="z-index: 20;"></div>
+            <div class="absolute bg-white" style="inset: 16px; z-index: 10;">
+              <iframe src="https://opennccu.com/u/lulu" scrolling="yes" id="myIframe" class="border-0 w-full h-full"
+              ></iframe>
+            </div>
+            -->
           </div>
         </div>
   
@@ -83,7 +95,7 @@
   
   <script setup>
     import '~/assets/css/tailwind base.css';
-    import { ref } from 'vue';
+    import { ref, reactive } from 'vue';
     import { useRoute } from 'vue-router';
     import BottomBar from '@/components/tag_introduction/bottom_bar.vue';
     import TextField from '@/components/tag_introduction/text_field.vue';
@@ -99,7 +111,13 @@
     const route = useRoute();
     const { id } = route.params;
     */
-    
+   
+    //測試用 可刪除
+    document.getElementById('myIframe').addEventListener('load', function() { 
+       this.style.padding = '10px'; 
+       this.style.boxSizing = 'border-box'; 
+      });
+    //
   
     const currentStep = ref(1);
     const maxSteps = 4;
@@ -144,5 +162,36 @@
     .h-\[410px\]{
       height: 410px;
     }
-  
+
+    /*以下均為測試*/
+    .w-\[380px\]{
+      width: 380px;
+    }
+    .h-\[380px\]{
+      height: 380px;
+    }
+    .inset-0{
+      top: 0px; 
+      right: 0px; 
+      bottom: 0px; 
+      left: 0px;
+    }
+    .inset-4{
+      top: 1rem; 
+      right: 1rem; 
+      bottom: 1rem; 
+      left: 1rem;
+    }
+    .shadow-container::before { 
+      content: '';
+      position: absolute; 
+      top: 0;
+      left: 0;
+       right: 0; 
+       bottom: 0; 
+       border-radius: 0.5rem; 
+       box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+        pointer-events: none; 
+        /* 確保這個陰影層不會干擾其他操作 */ 
+      }
   </style>

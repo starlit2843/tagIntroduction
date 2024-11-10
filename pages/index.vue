@@ -104,7 +104,8 @@ import '~/assets/css/transition.css';
 import ComponentSheetButton from '~/components/Sheet/FullWidthButton.vue';
 
 
-import { reactive } from 'vue'; const url = reactive({ key: 1, src: 'https://opennccu.com/u/lulu', });
+import { reactive } from 'vue'; 
+const url = reactive({ key: 1, src: 'https://opennccu.com/u/lulu', });
 
 /*按鈕的內容*/
 const message = ref('');

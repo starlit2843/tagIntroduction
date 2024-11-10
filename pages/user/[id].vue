@@ -1,10 +1,12 @@
 <template>
   <div class="flex justify-around py-4 max-w-screen-lg mx-auto h-screen overflow-y-auto">
     <div class="flex flex-col gap-6 bg-gray-100">
-      <div class="flex justify-between items-center grid-cols-3">
-        <span v-if="currentStep > 1" class="last_step text-xl font-semibold cursor-pointer" @click="lastStep">
-          上一步
+      <div class="flex relative justify-between items-center grid-cols-3">
+        <span v-if="currentStep > 1" class="last_step text-xl font-semibold cursor-pointer flex items-center" @click="lastStep">
+          <img src="~/assets/images/leftArrowIcon.png" class="w-8 h-8" alt="last step pic">
+          <span>上一步</span>
         </span>
+        
         <!--使限時連結功能置中-->
         <span v-else class="text-xl font-semibold opacity-0">
           上一步
@@ -20,7 +22,7 @@
       <!--gif/iframe-->
       <div class="flex justify-center items-center" v-if="currentStep==1">
         <div class="w-[400px] h-[410px] rounded-lg border border-gray-300 relative shadow-numo-light-inset">
-          <iframe :src="`https://opennccu.com/u/${id}`" class="h-full w-full rounded-lg border border-gray-300"/>
+          <img :src="dogLoadGif" class="h-full w-full rounded-lg border border-gray-300"/>
         </div>
       </div>
 
@@ -33,7 +35,7 @@
       <div class="flex justify-center items-center" v-if="currentStep==3">
         <div v-if="linkToProfileCheck">
           <div class="w-[400px] h-[410px] rounded-lg border border-gray-300 relative shadow-numo-light-inset">
-            <iframe src="`https://opennccu.com/u/${id}`" scrolling="yes" class="h-full w-full rounded-lg border border-gray-300"></iframe>
+            <iframe :src="`https://opennccu.com/u/${id}`" scrolling="yes" class="h-full w-full rounded-lg border border-gray-300"></iframe>
           </div>
         </div>
         <div v-else>
@@ -51,7 +53,12 @@
 
       <BottomBar :activeIndex="currentStep" />
 
-      <TextField :activeIndex="currentStep" @updateLinkSelected="updateLinkSelected" :id="id" @linkToProfile="linkToProfile"/>
+      <TextField :activeIndex="currentStep" 
+                  @updateLinkSelected="updateLinkSelected" 
+                  :id="id" 
+                  :linkToProfileCheck="linkToProfileCheck"
+                  @linkToProfile="linkToProfile"
+                  :showLinks="showLinks"/>
 
       <!--button們-->
       <!--fade待做 讓button有漸入效果-->
@@ -117,10 +124,11 @@
   const route = useRoute();
   const id = route.params.id;
 
-  const currentStep = ref(2);
+  const currentStep = ref(1);
   const maxSteps = 4;
   const linkSelected = ref(false);
   const linkToProfileCheck = ref(false);
+  const showLinks = ref(false);
 
   function skipTutorial() {
     alert("跳過教學");
@@ -136,6 +144,11 @@
     if (currentStep.value > 1) {
       currentStep.value -= 1;
       linkSelected.value = false;
+    }
+    if(currentStep.value != 2){
+      linkToProfileCheck.value = false;
+      showLinks.value = false;
+      alert("初始化！");
     }
   }
   function check(){
@@ -157,7 +170,7 @@
 
 <style lang="css">
   .skip_tutorial, .last_step{
-    color:darkseagreen;
+    color:rgb(89, 204, 149);
   }
 
 </style>
