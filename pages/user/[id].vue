@@ -148,7 +148,6 @@
     if(currentStep.value != 2){
       linkToProfileCheck.value = false;
       showLinks.value = false;
-      alert("初始化！");
     }
   }
   function check(){
