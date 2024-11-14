@@ -63,7 +63,7 @@
         <!--button們-->
         <!--fade待做 讓button有漸入效果-->
         <!--<transition name="fade">-->
-        <div class="flex justify-center" v-if="currentStep==1">
+        <div v-if="currentStep==1">
           <Button :type="button1.type"
                   :content="button1.content"
                   :function ="button1.function"

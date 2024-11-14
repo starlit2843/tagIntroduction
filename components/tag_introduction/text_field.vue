@@ -59,7 +59,6 @@
   
         <!-- 第三頁 -->
         <div v-if="activeIndex == 3">  
-
           <div v-if="linkToProfileCheck">
             <div class="flex justify-center items-center">
               <p class="break-all w-[370px] font-semibold">
