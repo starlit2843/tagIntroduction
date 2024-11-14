@@ -64,42 +64,51 @@
         <!--fade待做 讓button有漸入效果-->
         <!--<transition name="fade">-->
         <div class="flex justify-center" v-if="currentStep==1">
-          <button class="specialcta-btn shadow-special-cta-02 place-self-center rounded-10 px-6 py-3" @click="nextStep">
-            <span class="text-[2vw] text-white min-[300px]:text-xl">下一步</span>
-          </button>
+          <Button :type="button1.type"
+                  :content="button1.content"
+                  :function ="button1.function"
+                  @next_step="nextStep"/>
         </div>
   
         <div class="flex justify-center" v-if="currentStep==2">
           <div v-if="linkSelected">
-            <button class="specialcta-btn shadow-special-cta-02 place-self-center rounded-10 px-6 py-3" @click="nextStep">
-              <span class="text-[2vw] text-white min-[300px]:text-xl">下一步</span>
-            </button>
+            <Button :type="button2_2.type"
+                  :content="button2_2.content"
+                  :function ="button2_2.function"
+                  @next_step="nextStep"/>
           </div>
           <div v-else>
-            <button class="bg-base-100 shadow-numo-modal place-self-center rounded-10 px-4 py-2" @click="check">
-              <span class=" text-white text-sm">您尚未選擇限時連結</span>
-            </button>
+            <Button :type="button2_1.type"
+                  :content="button2_1.content"
+                  :function ="button2_1.function"
+                  :changeto ="button2_1.changeto"
+                  @next_step="nextStep"/>
           </div>
         </div>
   
         <div class="flex justify-center" v-if="currentStep==3">
           <div v-if="linkToProfileCheck">
-            <button class="specialcta-btn shadow-special-cta-02 place-self-center rounded-10 px-6 py-3" @click="nextStep">
-              <span class="text-[2vw] text-white min-[300px]:text-xl">下一步</span>
-            </button>
+            <Button :type="button3_2.type"
+                  :content="button3_2.content"
+                  :function ="button3_2.function"
+                  @next_step="nextStep"/>
           </div>
   
           <div v-else>
-            <button class="bg-base-100 shadow-numo-modal place-self-center rounded-10 px-4 py-2" @click="">
-                <span class=" text-white text-sm">趕緊查看吧！</span>
-            </button>
+            <Button :type="button3_1.type"
+                  :content="button3_1.content"
+                  :function ="button3_1.function"
+                  :changeto ="button3_1.changeto"
+                  @next_step="nextStep"/>
           </div>
         </div>
   
         <div class="flex justify-center" v-if="currentStep==4">
-          <button class="specialcta-btn shadow-special-cta-02 place-self-center rounded-10 px-6 py-3" @click="moveToNextPart">
-            <span class="text-[2vw] text-white min-[300px]:text-xl">馬上去設置</span>
-          </button>
+          <Button :type="button4.type"
+                  :content="button4.content"
+                  :function ="button4.function"
+                  :changeto ="button4.changeto"
+                  @next_step="nextStep"/>
         </div>
   
         <!--buttom 用v-for-->
@@ -117,6 +126,7 @@
     import { useRoute } from 'vue-router';
     import BottomBar from '@/components/tag_introduction/bottom_bar.vue';
     import TextField from '@/components/tag_introduction/text_field.vue';
+    import Button from '@/components/tag_introduction/button.vue';
   
     import dogLoadingGif from '@/assets/images/dogLoading.gif';
     import dogWorkingGif from '@/assets/images/dogWorking.gif';
@@ -141,9 +151,13 @@
     //步驟數量
     //待做
     const step_amount = 4;
+    
     //網站上方置中的標題
     const page_title = '限時連結功能指引';
+
     //按鈕設定
+    //inner_button_amount: 頁面是否有大於一個的按鈕流程
+    //inner_button_set: 流程中除了第一個按鈕外的其餘設定
     //type: b -> 藍綠色按鈕 ；g -> 灰色按鈕
     //content: 按鈕內容
     //function: next_step -> 下一頁 ； change -> 換頁面功能
@@ -153,29 +167,29 @@
         content: "下一步",
         function: "next_step"
     }
-    const button_2_1 = {
+    const button2_1 = {
         type: "g",
         content: "您尚未選擇限時連結",
         function: "change",
         changeto: "checkRegister"
     }
-    const button_2_2 = {
+    const button2_2 = {
         type: "b",
         content: "下一步",
         function: "next_step"
     }
-    const button_3_1 = {
+    const button3_1 = {
         type: "g",
         content: "趕緊查看吧！",
         function: "change",
         changeto: ""
     }
-    const button_3_2 = {
+    const button3_2 = {
         type: "b",
         content: "下一步",
         function: "next_step"
     }
-    const button_4 = {
+    const button4 = {
         type: "b",
         content: "馬上去設置",
         function: "change",
@@ -183,8 +197,6 @@
     }
 
     //button type content function changeto @next_step="nextStep"
-  
-  
   
     function skipTutorial() {
       alert("跳過教學");

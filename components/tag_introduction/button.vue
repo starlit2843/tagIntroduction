@@ -1,18 +1,23 @@
 <template>
-    <!--藍綠色按鈕-->
-    <div class="flex justify-center" v-if="type == 'b'">
-        <button class="specialcta-btn shadow-special-cta-02 place-self-center rounded-10 px-6 py-3" @click="clicked">
-            <span class="text-[2vw] text-white min-[300px]:text-xl">{{ content }}</span>
-        </button>
+    <div v-if="inner_button_amount === 0">
+        <!--藍綠色按鈕-->
+        <div class="flex justify-center" v-if="type == 'b'">
+            <button class="specialcta-btn shadow-special-cta-02 place-self-center rounded-10 px-6 py-3" @click="clicked">
+                <span class="text-[2vw] text-white min-[300px]:text-xl">{{ content }}</span>
+            </button>
+        </div>
+
+        <!--灰色按鈕-->
+        <div class="flex justify-center" v-if="type == 'g'">
+            <button class="bg-base-100 shadow-numo-modal place-self-center rounded-10 px-4 py-2" @click="clicked">
+                <span class=" text-white text-sm">{{ content }}</span>
+            </button>
+        </div>
     </div>
 
-    <!--灰色按鈕-->
-    <div class="flex justify-center" v-if="currentStep==2">
-        <button class="bg-base-100 shadow-numo-modal place-self-center rounded-10 px-4 py-2" @click="clicked">
-            <span class=" text-white text-sm">{{ content }}</span>
-        </button>
-    </div>
+    <div>
 
+    </div>
 </template>
 
 <script setup>
@@ -20,6 +25,15 @@
     const emit = defineEmits();
 
     const props = defineProps({
+        inner_button_amount: {
+            type: Number,
+            required: false,
+            default: 0
+        },
+        inner_button_set: {
+            type: Object,
+            required: false,
+        },
         type: {
             type: String,
             required: true,
