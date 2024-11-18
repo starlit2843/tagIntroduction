@@ -7,7 +7,7 @@
         >
           <div class="flex justify-center items-center">
             <p class="break-all w-[370px] font-semibold">
-                每次報告、列印都在陌生電腦上登入私人帳號嗎？  
+                每次報告、列印都在陌生電腦上登入私人帳號嗎？
                 有了Open NCCU限時連結功能，再也不用煩惱了！
             </p>
           </div>

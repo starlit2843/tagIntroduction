@@ -62,6 +62,7 @@
     }
 
     function change(){
+        //
         //之後改成switch
         if(props.changeto === "checkRegister"){
             alert("您尚未註冊！");
